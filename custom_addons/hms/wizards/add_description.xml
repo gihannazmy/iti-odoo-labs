@@ -1,0 +1,31 @@
+<odoo>
+   <!-- Form view for the wizard -->
+   <record id="view_add_description_wizards_form" model="ir.ui.view">add_description_wizards.py
+       <field name="name">patient.log.wizard.form</field>
+       <field name="model">patient.log.wizard</field>
+       <field name="arch" type="xml">
+           <form string="Add Log History Line">
+               <group>
+                   <field name="date"/>
+                   <field name="description"/>
+                   <field name="patient_id" invisible="1"/>
+               </group>
+               <footer>
+                   <button name="add_log" type="object" string="Add" class="btn-primary"/>
+                   <button string="Cancel" class="btn-secondary" special="cancel"/>
+               </footer>
+           </form>
+       </field>
+   </record>
+
+
+   <!-- Action to open the wizard -->
+   <record id="action_patient_log_wizard" model="ir.actions.act_window">
+       <field name="name">Add Log History Line</field>
+       <field name="res_model">patient.log.wizard</field>
+       <field name="view_mode">form</field>
+       <field name="view_id" ref="view_patient_log_wizard_form"/>
+       <field name="target">new</field>
+       <field name="context">{'default_patient_id': active_id}</field>
+   </record>
+</odoo>

@@ -1,0 +1,59 @@
+<odoo>
+
+    <record id="task_tree_view" model="ir.ui.view">
+        <field name="name">task.tree.view</field>
+        <field name="model">td.task</field>
+        <field name="arch" type="xml">
+            <tree string="Task List">
+                <field name="name"/>
+                <field name="number"/>
+                <field name="tag"/>
+                <field name="state"/>
+                <field name="assigned_to"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="task_form_view" model="ir.ui.view">
+        <field name="name">task.form.view</field>
+        <field name="model">td.task</field>
+        <field name="arch" type="xml">
+            <form string="Task Form">
+                <header>
+                    <button name="action_new" type="object" class="btn-info" string="New" invisible = "state == 'new' "/>
+                    <button name="action_doing" type="object" class="btn-primary" string="Doing" invisible = "state == 'doing' "/>
+                    <button name="action_done" type="object" class="btn-success" string="Done" invisible = "state == 'done' "/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="number"/>
+                        </group>
+                        <group>
+                            <field name="tag"/>
+                            <field name="assigned_to"/>
+                            <field name="file"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="to_do_task_action_view" model="ir.actions.act_window">
+        <field name="name">Tasks</field>
+        <field name="res_model">td.task</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menuitem_to_do_task"
+          name="All Tasks"
+          parent="menu_root_to_do"
+          action="to_do_task_action_view"/>
+</odoo>
